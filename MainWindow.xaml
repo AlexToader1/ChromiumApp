@@ -2,8 +2,36 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
-        Title="Interfata Chromium" Height="600" Width="1000">
+        Title="Evidenta Populatiei" Height="600" Width="1000"
+        WindowStyle="None" 
+        Background="#181818">
+
+    <!-- Adaugă acest cod pentru a elimina marginile sistemului -->
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="0" ResizeBorderThickness="5" GlassFrameThickness="0" CornerRadius="0"/>
+    </WindowChrome.WindowChrome>
+    
     <Grid>
-        <wv2:WebView2 Name="webView" Source="https://www.google.com" />
+        <Grid.RowDefinitions>
+            <!-- Rândul 0 pentru bara noastră de 35 pixeli -->
+            <RowDefinition Height="35"/>
+            <!-- Rândul 1 pentru restul aplicației (WebView) -->
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Bara customizată -->
+        <Grid Grid.Row="0" Background="#181818" MouseLeftButtonDown="BaraSus_TrageFereastra">
+            <TextBlock Text="Evidența Populației" Foreground="White" VerticalAlignment="Center" Margin="15,0,0,0" FontFamily="Segoe UI" />
+            
+            <!-- Butoanele din dreapta: Minimizare, Maximizare, Închidere -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Content="—" Width="45" Background="Transparent" Foreground="White" BorderThickness="0" Click="Minimizare_Click"/>
+                <Button Content="☐" Width="45" Background="Transparent" Foreground="White" BorderThickness="0" Click="Maximizare_Click"/>
+                <Button Content="✕" Width="45" Background="Transparent" Foreground="White" BorderThickness="0" Click="Inchidere_Click"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- Browser-ul (HTML-ul tău) -->
+        <wv2:WebView2 Name="webView" Grid.Row="1" />
     </Grid>
 </Window>
